@@ -9,11 +9,13 @@ function PagesList({ pages = [], theme, activeTab, searchTerm, setContent, onIte
       {(activeTab === 'all' ? pages : filteredPages).map((page, idx) => (
         <li key={page.id || idx} className={
           theme === 'dark'
-            ? "py-2 px-2 border-b border-gray-700 cursor-pointer hover:bg-pink-500/30 rounded transition-colors text-[12px] flex items-center justify-between"
+            ? "py-2 px-2 border-b border-gray-700 cursor-pointer hover:bg-blue-500/30 rounded transition-colors text-[12px] flex items-center justify-between"
+            : theme === 'blue'
+            ? "py-2 px-2 border-b border-blue-100 cursor-pointer hover:bg-blue-200 rounded transition-colors text-[12px] flex items-center justify-between"
             : "py-2 px-2 border-b border-pink-100 cursor-pointer hover:bg-pink-200 rounded transition-colors text-[12px] flex items-center justify-between"
         }>
           <span
-            className={theme === 'dark' ? "text-white/90" : "text-gray-900/90"}
+            className={theme === 'dark' ? "text-white/90" : theme === 'blue' ? "text-blue-900/90" : "text-gray-900/90"}
             style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
             onClick={() => { setContent(getDisplayName(page)); onItemClick && onItemClick(page); }}
           >
@@ -25,7 +27,7 @@ function PagesList({ pages = [], theme, activeTab, searchTerm, setContent, onIte
               target="_blank"
               rel="noopener noreferrer"
               onClick={e => e.stopPropagation()}
-              className="ml-2 flex items-center justify-center text-pink-500 hover:text-pink-700"
+              className={theme === 'blue' ? "ml-2 flex items-center justify-center text-blue-500 hover:text-blue-700" : "ml-2 flex items-center justify-center text-pink-500 hover:text-pink-700"}
               title="Open in OneNote Web"
               style={{ minWidth: 20 }}
             >
@@ -35,7 +37,7 @@ function PagesList({ pages = [], theme, activeTab, searchTerm, setContent, onIte
         </li>
       ))}
       {(activeTab === 'search' && filteredPages.length === 0 && searchTerm) && (
-        <li className={theme === 'dark' ? 'text-pink-200 py-4 text-center text-[12px]' : 'text-pink-400 py-4 text-center text-[12px]'}>No results found.</li>
+        <li className={theme === 'dark' ? 'text-blue-200 py-4 text-center text-[12px]' : theme === 'blue' ? 'text-blue-400 py-4 text-center text-[12px]' : 'text-pink-400 py-4 text-center text-[12px]'}>No results found.</li>
       )}
     </ul>
   );

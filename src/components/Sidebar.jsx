@@ -32,8 +32,10 @@ function Sidebar({
         ref={searchInputRef}
         className={
           theme === 'dark'
-            ? "mb-2 px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-gray-900/80 text-white text-base sm:text-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 placeholder-gray-400"
-            : "mb-2 px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-white text-gray-900 text-base sm:text-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-300 placeholder-gray-400"
+            ? "mb-2 px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-gray-900/80 text-white text-base sm:text-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+            : theme === 'blue'
+            ? "mb-2 px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-blue-100 text-blue-900 text-base sm:text-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-blue-400"
+            : "mb-2 px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-white text-gray-900 text-base sm:text-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
         }
       />
       {/* Tabs */}
@@ -41,8 +43,8 @@ function Sidebar({
         <button
           className={
             (activeTab === 'all'
-              ? (theme === 'dark' ? 'bg-pink-500 text-white' : 'bg-pink-200 text-gray-900')
-              : (theme === 'dark' ? 'bg-gray-800 text-pink-200' : 'bg-pink-50 text-pink-400')) +
+              ? (theme === 'dark' ? 'bg-blue-500 text-white' : theme === 'blue' ? 'bg-blue-400 text-white' : 'bg-blue-200 text-gray-900')
+              : (theme === 'dark' ? 'bg-gray-800 text-blue-200' : theme === 'blue' ? 'bg-blue-50 text-blue-600' : 'bg-blue-50 text-blue-400')) +
             ' flex-1 py-2 rounded-tl-xl font-semibold text-base sm:text-lg transition-colors duration-200 shadow'
           }
           onClick={() => setActiveTab('all')}
@@ -52,8 +54,8 @@ function Sidebar({
         <button
           className={
             (activeTab === 'search'
-              ? (theme === 'dark' ? 'bg-pink-500 text-white' : 'bg-pink-200 text-gray-900')
-              : (theme === 'dark' ? 'bg-gray-800 text-pink-200' : 'bg-pink-50 text-pink-400')) +
+              ? (theme === 'dark' ? 'bg-blue-500 text-white' : theme === 'blue' ? 'bg-blue-400 text-white' : 'bg-blue-200 text-gray-900')
+              : (theme === 'dark' ? 'bg-gray-800 text-blue-200' : theme === 'blue' ? 'bg-blue-50 text-blue-600' : 'bg-blue-50 text-blue-400')) +
             ' flex-1 py-2 rounded-tr-xl font-semibold text-base sm:text-lg transition-colors duration-200 shadow'
           }
           onClick={() => setActiveTab('search')}
@@ -66,7 +68,7 @@ function Sidebar({
         <button
           onClick={handleBack}
           className={
-            theme === 'dark' ? 'mb-2 mt-2 bg-gray-700 text-pink-200 px-4 py-2 rounded shadow hover:bg-gray-600' : 'mb-2 mt-2 bg-pink-100 text-pink-600 px-4 py-2 rounded shadow hover:bg-pink-200'
+            theme === 'dark' ? 'mb-2 mt-2 bg-gray-700 text-blue-200 px-4 py-2 rounded shadow hover:bg-gray-600' : theme === 'blue' ? 'mb-2 mt-2 bg-blue-100 text-blue-700 px-4 py-2 rounded shadow hover:bg-blue-200' : 'mb-2 mt-2 bg-blue-100 text-blue-600 px-4 py-2 rounded shadow hover:bg-blue-200'
           }
         >
           ← Back
@@ -79,7 +81,7 @@ function Sidebar({
             ? "flex-1 bg-gray-800/80 rounded-b-xl p-2 sm:p-4 overflow-y-auto shadow-inner"
             : theme === 'blue'
             ? "flex-1 bg-blue-50 rounded-b-xl p-2 sm:p-4 overflow-y-auto shadow-inner"
-            : "flex-1 bg-pink-50 rounded-b-xl p-2 sm:p-4 overflow-y-auto shadow-inner"
+            : "flex-1 bg-blue-50 rounded-b-xl p-2 sm:p-4 overflow-y-auto shadow-inner"
         }
         style={{
           height: '120px',
@@ -91,12 +93,12 @@ function Sidebar({
       >
         {isAuthenticated ? (
           loading ? (
-            <div className="text-center text-pink-400 py-4">Loading pages...</div>
+            <div className="text-center text-blue-400 py-4">Loading pages...</div>
           ) : error && error.message === 'auth_popup_required' ? (
-            <div className="text-center text-pink-400 py-4">
+            <div className="text-center text-blue-400 py-4">
               Session expired or consent required.<br />
               <button onClick={handleReAuth} className={
-                theme === 'dark' ? "mt-4 bg-pink-500 text-white px-4 py-2 rounded shadow" : "mt-4 bg-pink-200 text-gray-900 px-4 py-2 rounded shadow"
+                theme === 'dark' ? "mt-4 bg-blue-500 text-white px-4 py-2 rounded shadow" : theme === 'blue' ? "mt-4 bg-blue-400 text-white px-4 py-2 rounded shadow" : "mt-4 bg-blue-200 text-gray-900 px-4 py-2 rounded shadow"
               }>Re-authenticate</button>
             </div>
           ) : error ? (
@@ -104,7 +106,7 @@ function Sidebar({
           ) : (
             activeTab === 'search' ? (
               searchLoading ? (
-                <div className="text-center text-pink-400 py-4">Searching...</div>
+                <div className="text-center text-blue-400 py-4">Searching...</div>
               ) : searchError ? (
                 <div className="text-center text-red-400 py-4">{searchError}</div>
               ) : (
@@ -131,7 +133,7 @@ function Sidebar({
             )
           )
         ) : (
-          <div className="text-center text-pink-400 py-4">Please login to load pages.</div>
+          <div className="text-center text-blue-400 py-4">Please login to load pages.</div>
         )}
       </div>
     </div>

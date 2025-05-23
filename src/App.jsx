@@ -472,23 +472,35 @@ function App() {
     }
   }, [activeTab, searchTerm]);
 
+  // Add this useEffect to sync theme with <body> class for CSS variable theming
+  useEffect(() => {
+    document.body.classList.remove('dark', 'blue', 'light');
+    document.body.classList.add(theme);
+  }, [theme]);
+
   return (
-    <div className={theme === 'dark' ? "min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 flex flex-col font-roboto" : "min-h-screen bg-gradient-to-br from-pink-100 via-white to-pink-200 flex flex-col font-roboto"}>
+    <div className={
+      theme === 'dark'
+        ? "min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 flex flex-col font-roboto"
+        : theme === 'blue'
+        ? "min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 flex flex-col font-roboto"
+        : "min-h-screen bg-gradient-to-br from-pink-100 via-white to-pink-200 flex flex-col font-roboto"
+    }>
       {/* Top Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-center p-4 sm:p-6 gap-2 sm:gap-0">
         <div className={theme === 'dark' ? "text-xl sm:text-2xl font-bold text-white tracking-widest select-none drop-shadow-lg" : theme === 'blue' ? "text-xl sm:text-2xl font-bold text-blue-800 tracking-widest select-none drop-shadow-lg" : "text-xl sm:text-2xl font-bold text-gray-800 tracking-widest select-none drop-shadow-lg"}>CPOA INFORMATION HUB</div>
         <div className="flex gap-2 sm:gap-4 items-center mt-2 sm:mt-0">
           <button
             onClick={handleThemeToggle}
-            className={theme === 'dark' ? "bg-gray-800 text-pink-300 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-gray-700 transition-colors" : theme === 'blue' ? "bg-blue-200 text-blue-800 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-blue-300 transition-colors" : "bg-pink-200 text-gray-800 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-pink-300 transition-colors"}
+            className={theme === 'dark' ? "bg-gray-800 text-blue-300 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-gray-700 transition-colors" : theme === 'blue' ? "bg-blue-200 text-blue-800 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-blue-300 transition-colors" : "bg-pink-200 text-gray-800 px-4 sm:px-5 py-2 rounded-xl text-base font-semibold shadow hover:bg-pink-300 transition-colors"}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? 'Light Mode' : theme === 'blue' ? 'Pink Mode' : 'Dark Mode'}
+            {theme === 'dark' ? 'Blue Mode' : theme === 'blue' ? 'Light Mode' : 'Dark Mode'}
           </button>
           {isAuthenticated ? (
-            <button onClick={handleLogout} className={theme === 'dark' ? "bg-gradient-to-r from-pink-500 to-red-400 text-white px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : theme === 'blue' ? "bg-gradient-to-r from-blue-400 to-blue-200 text-blue-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : "bg-gradient-to-r from-pink-400 to-red-200 text-gray-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform"}>LOGOUT</button>
+            <button onClick={handleLogout} className={theme === 'dark' ? "bg-gradient-to-r from-blue-500 to-blue-400 text-white px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : theme === 'blue' ? "bg-gradient-to-r from-blue-400 to-blue-200 text-blue-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : "bg-gradient-to-r from-pink-400 to-red-200 text-gray-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform"}>LOGOUT</button>
           ) : (
-            <button onClick={handleLogin} className={theme === 'dark' ? "bg-gradient-to-r from-pink-500 to-red-400 text-white px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : theme === 'blue' ? "bg-gradient-to-r from-blue-400 to-blue-200 text-blue-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : "bg-gradient-to-r from-pink-400 to-red-200 text-gray-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform"}>LOGIN MICROSOFT</button>
+            <button onClick={handleLogin} className={theme === 'dark' ? "bg-gradient-to-r from-blue-500 to-blue-400 text-white px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : theme === 'blue' ? "bg-gradient-to-r from-blue-400 to-blue-200 text-blue-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform" : "bg-gradient-to-r from-pink-400 to-red-200 text-gray-900 px-3 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transition-transform"}>LOGIN MICROSOFT</button>
           )}
         </div>
       </div>
