@@ -467,8 +467,8 @@ function App() {
   useEffect(() => {
     const input = searchInputRef.current;
     if (input) {
-      input.addEventListener('keydown', handleSearchInputKeyDown);
-      return () => input.removeEventListener('keydown', handleSearchInputKeyDown);
+      input.addEventListener('keydown', handleSearchInputKeyDown, { passive: true });
+      return () => input.removeEventListener('keydown', handleSearchInputKeyDown, { passive: true });
     }
   }, [activeTab, searchTerm]);
 

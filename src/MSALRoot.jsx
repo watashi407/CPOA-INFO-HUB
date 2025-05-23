@@ -7,7 +7,7 @@ const msalConfig = {
   auth: {
     clientId: '625d88e5-92ce-4611-aa66-5fbef0b74bb6',
     authority: 'https://login.microsoftonline.com/073be8a1-48eb-494c-8d79-cbf237967925',
-    redirectUri: 'http://localhost:5173',
+    redirectUri: 'https://cpoa-info-hub.vercel.app',
   },
 };
 
