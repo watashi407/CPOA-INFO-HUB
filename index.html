@@ -22,12 +22,11 @@
         await ZOHO.embeddedApp.init();
       })();
     </script>
+    <!-- Vite will inject the correct production script tag during build -->
     <script type="module">
-      // Only import the source file in development
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
         import('/src/main.jsx'); // Vite dev server (hot reload)
       }
-      // In production, Vite injects the correct hashed script automatically after build
     </script>
   </body>
 </html>

@@ -13,10 +13,22 @@ const msalConfig = {
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
-// Ensure MSAL is initialized before rendering the app
-await msalInstance.initialize();
+// Remove top-level await for build compatibility
+// Instead, initialize in a useEffect in the component
 
 export default function MSALRoot() {
+  const [ready, setReady] = React.useState(false);
+
+  React.useEffect(() => {
+    let ignore = false;
+    msalInstance.initialize().then(() => {
+      if (!ignore) setReady(true);
+    });
+    return () => { ignore = true; };
+  }, []);
+
+  if (!ready) return <div style={{textAlign:'center',padding:'2rem',color:'#2563eb'}}>Initializing authentication...</div>;
+
   return (
     <MsalProvider instance={msalInstance}>
       <App />
