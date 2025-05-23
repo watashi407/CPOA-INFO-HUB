@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root" ></div>
+    <script>
+      (async () => {
+        ZOHO.embeddedApp.on("PageLoad", async function (data) {
+          // Custom Business logic goes here
+          await ZOHO.CRM.UI.Resize({
+            height: "1000",
+            width: "450",
+          });
+          await import("/src/main.jsx");
+        });
+        // Initializing the widget.
+        await ZOHO.embeddedApp.init();
+      })();
+    </script>
+  </body>
+</html>
