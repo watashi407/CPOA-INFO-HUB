@@ -9,17 +9,35 @@
   </head>
   <body>
     <div id="root" ></div>
-    <script type="module">
+    <script>
       (async () => {
-        await ZOHO.embeddedApp.init();
         ZOHO.embeddedApp.on("PageLoad", async function (data) {
           // Custom Business logic goes here
           await ZOHO.CRM.UI.Resize({
             height: "1000",
             width: "450",
           });
-          import("./src/main.jsx");
         });
+        // Initializing the widget.
+        await ZOHO.embeddedApp.init();
+      })();
+    </script>
+    <script type="module">
+      (async () => {
+        // Only import the source file in development
+        let mainPath;
+        // Use only hostname for dev check
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+          mainPath = '/src/main.jsx'; // Vite dev server (hot reload)
+        } else {
+          // Vite build output (production): use the correct relative path
+          mainPath = './assets/main.js';
+        }
+        try {
+          await import(mainPath);
+        } catch (e) {
+          console.error('Failed to load main.js:', e);
+        }
       })();
     </script>
   </body>
