@@ -6,6 +6,9 @@ import MSALRoot from './MSALRoot';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+        
+
+
     <MSALRoot />
   </StrictMode>,
 )

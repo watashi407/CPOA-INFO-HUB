@@ -9,18 +9,17 @@
   </head>
   <body>
     <div id="root" ></div>
-    <script>
+    <script type="module">
       (async () => {
+        await ZOHO.embeddedApp.init();
         ZOHO.embeddedApp.on("PageLoad", async function (data) {
           // Custom Business logic goes here
           await ZOHO.CRM.UI.Resize({
             height: "1000",
             width: "450",
           });
-          await import("/src/main.jsx");
+          import("./src/main.jsx");
         });
-        // Initializing the widget.
-        await ZOHO.embeddedApp.init();
       })();
     </script>
   </body>
