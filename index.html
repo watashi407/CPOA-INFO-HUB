@@ -10,12 +10,7 @@
     <div id="root" ></div>
     <!-- Vite will inject the correct production script tag during build -->
     <script type="module">
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-        import('/src/main.jsx').then(module => {
-          // Render the app into the #root element
-          // This is already handled in main.jsx, so no extra code is needed here
-        });
-      }
+        import('/src/main.jsx'); // Vite dev server (hot reload)
     </script>
   </body>
 </html>

@@ -306,6 +306,7 @@ function App() {
         scopes: GRAPH_SCOPES,
         account: accounts[0],
       });
+      console.log('access key coming onenote', response.accessToken); // Debug log
       return response.accessToken;
     } catch (e) {
       if (e.errorCode === 'interaction_required' || e.message?.includes('interaction_required')) {
